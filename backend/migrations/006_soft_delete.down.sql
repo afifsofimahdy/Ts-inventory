@@ -1,0 +1,11 @@
+ALTER TABLE stock_adjustments DROP COLUMN IF EXISTS deleted_at;
+ALTER TABLE stock_out_logs DROP COLUMN IF EXISTS deleted_at;
+ALTER TABLE stock_out_items DROP COLUMN IF EXISTS deleted_at;
+ALTER TABLE stock_out DROP COLUMN IF EXISTS deleted_at;
+ALTER TABLE stock_in_logs DROP COLUMN IF EXISTS deleted_at;
+ALTER TABLE stock_in_items DROP COLUMN IF EXISTS deleted_at;
+ALTER TABLE stock_in DROP COLUMN IF EXISTS deleted_at;
+ALTER TABLE inventory DROP COLUMN IF EXISTS deleted_at;
+ALTER TABLE items DROP COLUMN IF EXISTS deleted_at;
+ALTER TABLE categories DROP COLUMN IF EXISTS deleted_at;
+ALTER TABLE customers DROP COLUMN IF EXISTS deleted_at;

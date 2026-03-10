@@ -1,0 +1,243 @@
+{
+  "info": {
+    "name": "Smart Inventory API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:8080" },
+    { "key": "apiKey", "value": "your-secret-key" }
+  ],
+  "item": [
+    {
+      "name": "Inventory - List",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "X-API-Key", "value": "{{apiKey}}" }],
+        "url": {
+          "raw": "{{baseUrl}}/inventory?name=&sku=&customer=",
+          "host": ["{{baseUrl}}"],
+          "path": ["inventory"],
+          "query": [
+            { "key": "name", "value": "" },
+            { "key": "sku", "value": "" },
+            { "key": "customer", "value": "" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Inventory - Adjust",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "X-API-Key", "value": "{{apiKey}}" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "url": { "raw": "{{baseUrl}}/inventory/adjust", "host": ["{{baseUrl}}"], "path": ["inventory", "adjust"] },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"sku\": \"AU-002\",\n  \"new_physical\": 60,\n  \"reason\": \"Opname\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Inventory - Stock Log",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "X-API-Key", "value": "{{apiKey}}" }],
+        "url": {
+          "raw": "{{baseUrl}}/inventory/adjustments?sku=AU-002",
+          "host": ["{{baseUrl}}"],
+          "path": ["inventory", "adjustments"],
+          "query": [{ "key": "sku", "value": "AU-002" }]
+        }
+      }
+    },
+    {
+      "name": "Stock In - Create",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "X-API-Key", "value": "{{apiKey}}" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "url": { "raw": "{{baseUrl}}/stock-ins", "host": ["{{baseUrl}}"], "path": ["stock-ins"] },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"items\": [\n    { \"sku\": \"AU-002\", \"qty\": 2 }\n  ]\n}"
+        }
+      }
+    },
+    {
+      "name": "Stock In - Update Status",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "X-API-Key", "value": "{{apiKey}}" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "url": { "raw": "{{baseUrl}}/stock-ins/{{code}}/status", "host": ["{{baseUrl}}"], "path": ["stock-ins", "{{code}}", "status"] },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"status\": \"IN_PROGRESS\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Stock In - By Code",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "X-API-Key", "value": "{{apiKey}}" }],
+        "url": { "raw": "{{baseUrl}}/stock-ins/code/{{code}}", "host": ["{{baseUrl}}"], "path": ["stock-ins", "code", "{{code}}"] }
+      }
+    },
+    {
+      "name": "Stock In - List",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "X-API-Key", "value": "{{apiKey}}" }],
+        "url": {
+          "raw": "{{baseUrl}}/stock-ins?status=CREATED,IN_PROGRESS,DONE,CANCELLED",
+          "host": ["{{baseUrl}}"],
+          "path": ["stock-ins"],
+          "query": [{ "key": "status", "value": "CREATED,IN_PROGRESS,DONE,CANCELLED" }]
+        }
+      }
+    },
+    {
+      "name": "Stock In - Delete",
+      "request": {
+        "method": "DELETE",
+        "header": [{ "key": "X-API-Key", "value": "{{apiKey}}" }],
+        "url": { "raw": "{{baseUrl}}/stock-ins/{{code}}", "host": ["{{baseUrl}}"], "path": ["stock-ins", "{{code}}"] }
+      }
+    },
+    {
+      "name": "Stock Out - Create",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "X-API-Key", "value": "{{apiKey}}" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "url": { "raw": "{{baseUrl}}/stock-outs", "host": ["{{baseUrl}}"], "path": ["stock-outs"] },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"items\": [\n    { \"sku\": \"AU-002\", \"qty\": 1 }\n  ]\n}"
+        }
+      }
+    },
+    {
+      "name": "Stock Out - Allocate",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "X-API-Key", "value": "{{apiKey}}" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "url": { "raw": "{{baseUrl}}/stock-outs/{{code}}/allocate", "host": ["{{baseUrl}}"], "path": ["stock-outs", "{{code}}", "allocate"] },
+        "body": { "mode": "raw", "raw": "{}" }
+      }
+    },
+    {
+      "name": "Stock Out - Update Status",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "X-API-Key", "value": "{{apiKey}}" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "url": { "raw": "{{baseUrl}}/stock-outs/{{code}}/status", "host": ["{{baseUrl}}"], "path": ["stock-outs", "{{code}}", "status"] },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"status\": \"IN_PROGRESS\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Stock Out - By Code",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "X-API-Key", "value": "{{apiKey}}" }],
+        "url": { "raw": "{{baseUrl}}/stock-outs/code/{{code}}", "host": ["{{baseUrl}}"], "path": ["stock-outs", "code", "{{code}}"] }
+      }
+    },
+    {
+      "name": "Stock Out - List",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "X-API-Key", "value": "{{apiKey}}" }],
+        "url": {
+          "raw": "{{baseUrl}}/stock-outs?status=DRAFT,ALLOCATED,IN_PROGRESS,DONE,CANCELLED",
+          "host": ["{{baseUrl}}"],
+          "path": ["stock-outs"],
+          "query": [{ "key": "status", "value": "DRAFT,ALLOCATED,IN_PROGRESS,DONE,CANCELLED" }]
+        }
+      }
+    },
+    {
+      "name": "Stock Out - Delete",
+      "request": {
+        "method": "DELETE",
+        "header": [{ "key": "X-API-Key", "value": "{{apiKey}}" }],
+        "url": { "raw": "{{baseUrl}}/stock-outs/{{code}}", "host": ["{{baseUrl}}"], "path": ["stock-outs", "{{code}}"] }
+      }
+    },
+    {
+      "name": "Reports - Stock In",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "X-API-Key", "value": "{{apiKey}}" }],
+        "url": {
+          "raw": "{{baseUrl}}/reports/stock-ins?date_from=2026-01-01&date_to=2026-12-31",
+          "host": ["{{baseUrl}}"],
+          "path": ["reports", "stock-ins"],
+          "query": [
+            { "key": "date_from", "value": "2026-01-01" },
+            { "key": "date_to", "value": "2026-12-31" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Reports - Stock Out",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "X-API-Key", "value": "{{apiKey}}" }],
+        "url": {
+          "raw": "{{baseUrl}}/reports/stock-outs?date_from=2026-01-01&date_to=2026-12-31",
+          "host": ["{{baseUrl}}"],
+          "path": ["reports", "stock-outs"],
+          "query": [
+            { "key": "date_from", "value": "2026-01-01" },
+            { "key": "date_to", "value": "2026-12-31" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Master - Customers",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "X-API-Key", "value": "{{apiKey}}" }],
+        "url": { "raw": "{{baseUrl}}/customers", "host": ["{{baseUrl}}"], "path": ["customers"] }
+      }
+    },
+    {
+      "name": "Master - Categories",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "X-API-Key", "value": "{{apiKey}}" }],
+        "url": { "raw": "{{baseUrl}}/categories", "host": ["{{baseUrl}}"], "path": ["categories"] }
+      }
+    },
+    {
+      "name": "Master - Products",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "X-API-Key", "value": "{{apiKey}}" }],
+        "url": { "raw": "{{baseUrl}}/products", "host": ["{{baseUrl}}"], "path": ["products"] }
+      }
+    }
+  ]
+}

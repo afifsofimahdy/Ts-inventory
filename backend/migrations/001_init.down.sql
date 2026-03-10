@@ -1,0 +1,10 @@
+DROP TABLE IF EXISTS stock_adjustments;
+DROP TABLE IF EXISTS stock_out_logs;
+DROP TABLE IF EXISTS stock_out_items;
+DROP TABLE IF EXISTS stock_out;
+DROP TABLE IF EXISTS stock_in_logs;
+DROP TABLE IF EXISTS stock_in_items;
+DROP TABLE IF EXISTS stock_in;
+DROP TABLE IF EXISTS inventory;
+DROP TABLE IF EXISTS items;
+DROP TABLE IF EXISTS customers;

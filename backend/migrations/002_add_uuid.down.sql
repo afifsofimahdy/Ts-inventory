@@ -1,0 +1,7 @@
+DROP INDEX IF EXISTS idx_stock_out_uuid;
+DROP INDEX IF EXISTS idx_stock_in_uuid;
+DROP INDEX IF EXISTS idx_items_uuid;
+
+ALTER TABLE stock_out DROP COLUMN IF EXISTS uuid;
+ALTER TABLE stock_in DROP COLUMN IF EXISTS uuid;
+ALTER TABLE items DROP COLUMN IF EXISTS uuid;
